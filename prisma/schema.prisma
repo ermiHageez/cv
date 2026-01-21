@@ -1,0 +1,15 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  text      String
+  userId    String
+  userName  String
+  createdAt DateTime @default(now())
+}

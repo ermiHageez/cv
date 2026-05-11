@@ -1,5 +1,3 @@
-import { portfolioConfig } from "@/app/config/portfolio";
-
 export interface GitHubRepo {
   id: number;
   name: string;
@@ -15,16 +13,13 @@ export interface GitHubRepo {
 }
 
 export async function fetchGitHubRepos(): Promise<GitHubRepo[]> {
-  const response = await fetch(
-    `${portfolioConfig.github.apiUrl}?sort=updated&per_page=100`
-  );
+  const response = await fetch("/api/github/repos");
 
   if (!response.ok) {
     throw new Error("Failed to fetch GitHub repositories");
   }
 
-  const repos: GitHubRepo[] = await response.json();
-  return repos.filter((repo) => !repo.name.includes(".github"));
+  return response.json();
 }
 
 export function getLanguageColor(language: string | null): string {
@@ -40,7 +35,7 @@ export function getLanguageColor(language: string | null): string {
   Kotlin: "hsl(270, 70%, 55%)",       // violet
   Shell: "hsl(140, 40%, 45%)",        // green
 };
-  return colors[language ?? ""] ?? "hsl(var(--muted-foreground))";
+  return colors[language ?? ""] ?? "var(--color-muted-foreground)";
 }
 
 export function formatDate(dateString: string): string {

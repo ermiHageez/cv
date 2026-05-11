@@ -1,48 +1,86 @@
-import React from 'react'
-import { portfolioConfig } from '@/app/config/portfolio';
+"use client";
+
+import { portfolioConfig } from "@/app/config/portfolio";
+import {
+  Monitor,
+  Server,
+  Database,
+  GitBranch,
+  Wrench,
+  Brain,
+} from "lucide-react";
+
+const categoryIcons: Record<string, React.ElementType> = {
+  Frontend: Monitor,
+  Backend: Server,
+  Databases: Database,
+  DevOps: GitBranch,
+  Tools: Wrench,
+  "AI/ML": Brain,
+};
+
+const categoryGradients: Record<string, string> = {
+  Frontend: "from-blue-500 to-cyan-500",
+  Backend: "from-emerald-500 to-teal-500",
+  Databases: "from-violet-500 to-purple-500",
+  DevOps: "from-orange-500 to-amber-500",
+  Tools: "from-rose-500 to-pink-500",
+  "AI/ML": "from-indigo-500 to-blue-500",
+};
+
 export default function SkillsSection() {
   const { skills } = portfolioConfig;
+
   return (
-    <div id="skills" className='flex flex-col gap-2.5 mb-10'>
-      {/* Title */}
-      <div className='flex flex-col items-center'>
-          <h2 className='text-3xl md:text-4xl font-bold text-foreground mb-4'>Skills & Technologies</h2>
-          <div className='px-2 border-2 border-blue-500 rounded w-40 self-center mb-3.5 '></div>
-      </div>
-      {/* paragraph */}
-      <div>
-        <p className='text-lg text-muted-foreground leading-relaxed mb-6 mx-4'>
-          A collection of technologies and tools I work with to build modern applications
-        </p>
-      </div>
-      {/* Skills Grid */}
-      <div>
-        {/* Skills Cards */}
-        <div>
-          <div className='mx-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center items-center'>
-            {skills.map((SkillsSection)=>(
-              <div key={SkillsSection.category} className='flex flex-col items-start justify-center 
-            border border-blue-500 rounded-xl 
-            px-8 py-6 
-            bg-white/10 
-            shadow-md hover:shadow-xl hover:shadow-blue-500/50 
-            transition duration-300 ease-in-out transform hover:-translate-y-1'>
-                <div className='flex items-center rounded-2xl gap-2'>
-                  <div className='border-2 border-blue-500 w-4 h-4 rounded-2xl mt-4 mb-2 bg-blue-500'></div>
-                  <h3 className='text-2xl font-semibold mb-2 mt-4 text-left'>{SkillsSection.category}</h3>
+    <section id="skills" className="py-28 relative">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16 reveal">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            Tech <span className="gradient-text">Stack</span>
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent rounded-full mx-auto" />
+          <p className="text-muted mt-4 max-w-xl mx-auto">
+            Technologies and tools I use to build production-grade applications
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {skills.map((category, index) => {
+            const Icon = categoryIcons[category.category] || Wrench;
+            const gradient = categoryGradients[category.category] || "from-primary to-accent";
+
+            return (
+              <div
+                key={category.category}
+                className="glass rounded-xl p-6 hover:glass-hover transition-all duration-300 hover:-translate-y-1 reveal"
+                style={{ transitionDelay: `${index * 0.05}s` }}
+              >
+                <div className="flex items-center gap-3 mb-5">
+                  <div
+                    className={`p-2.5 rounded-lg bg-gradient-to-br ${gradient} bg-opacity-10 text-white`}
+                  >
+                    <Icon size={18} />
+                  </div>
+                  <h3 className="text-lg font-semibold">
+                    {category.category}
+                  </h3>
                 </div>
-                <ul className='flex flex-wrap gap-3 mb-6'>
-                  {SkillsSection.items.map((skill, index) => (
-                    <li key={index} className='bg-white/10 px-4 py-2 rounded-lg border border-cyan-100 hover:scale-105 duration-300 hover:bg-blue-500 '>
+
+                <div className="flex flex-wrap gap-2">
+                  {category.items.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1.5 text-xs font-medium rounded-lg bg-white/[0.04] border border-white/[0.06] text-muted hover:text-foreground hover:border-primary/30 hover:bg-primary/[0.04] transition-all duration-300"
+                    >
                       {skill}
-                    </li>
+                    </span>
                   ))}
-                </ul>
+                </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
-    </div>
-  )
+    </section>
+  );
 }

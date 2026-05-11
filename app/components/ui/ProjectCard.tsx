@@ -1,6 +1,7 @@
-import { Star, GitFork, ExternalLink, Github } from "lucide-react";
+"use client";
+
+import { Star, GitFork, ExternalLink, Github, Calendar } from "lucide-react";
 import { GitHubRepo, getLanguageColor, formatDate } from "@/app/utils/github";
-import React from "react";
 
 interface ProjectCardProps {
   repo: GitHubRepo;
@@ -8,71 +9,84 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ repo }: ProjectCardProps) {
   return (
-    <div
-      className="flex flex-col border border-blue-500 rounded-lg p-6 
-                 bg-white/10 shadow-md hover:shadow-xl hover:shadow-blue-500/30 
-                 transition duration-300 ease-in-out transform hover:-translate-y-1"
-    >
-      {/* Header */}
-      <div className="flex items-center justify-between mb-2">
-        <h2 className="text-lg font-semibold text-foreground">
-          {repo.name}
-        </h2>
+    <div className="glass rounded-xl p-6 hover:glass-hover transition-all duration-300 hover:-translate-y-1 flex flex-col h-full group">
+      <div className="flex items-start justify-between mb-3">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="p-2 rounded-lg bg-primary/10 text-primary shrink-0">
+            <Github size={18} />
+          </div>
+          <h3 className="font-semibold text-foreground truncate">
+            {repo.name}
+          </h3>
+        </div>
         <a
           href={repo.html_url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-500 hover:text-blue-700"
+          className="p-2 rounded-lg text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all duration-300 shrink-0"
+          aria-label="View on GitHub"
         >
-          <ExternalLink size={18} />
+          <ExternalLink size={16} />
         </a>
       </div>
 
-      {/* Description */}
       {repo.description && (
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
           {repo.description}
         </p>
       )}
 
-      {/* Language + Stats */}
-      <div className="flex items-center justify-between text-sm">
-        <div className="flex items-center gap-2">
-          {repo.language && (
+      {repo.topics && repo.topics.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {repo.topics.slice(0, 4).map((topic) => (
             <span
-              className="flex items-center gap-1"
-              style={{ color: getLanguageColor(repo.language) }}
+              key={topic}
+              className="px-2.5 py-1 text-[11px] font-medium rounded-md bg-primary/5 text-primary/80 border border-primary/10"
             >
-              <span
-                className="w-3 h-3 rounded-full"
-                style={{ backgroundColor: getLanguageColor(repo.language) }}
-              ></span>
-              {repo.language}
+              {topic}
             </span>
-          )}
+          ))}
+        </div>
+      )}
+
+      <div className="mt-auto space-y-3">
+        <div className="flex items-center justify-between text-xs text-muted-foreground">
+          <div className="flex items-center gap-3">
+            {repo.language && (
+              <span className="flex items-center gap-1.5">
+                <span
+                  className="w-2.5 h-2.5 rounded-full"
+                  style={{ backgroundColor: getLanguageColor(repo.language) }}
+                />
+                {repo.language}
+              </span>
+            )}
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1">
+              <Star size={13} /> {repo.stargazers_count}
+            </span>
+            <span className="flex items-center gap-1">
+              <GitFork size={13} /> {repo.forks_count}
+            </span>
+          </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1 text-gray-600">
-            <Star size={16} /> {repo.stargazers_count}
+        <div className="flex items-center justify-between pt-3 border-t border-border">
+          <span className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
+            <Calendar size={12} />
+            {formatDate(repo.updated_at)}
           </span>
-          <span className="flex items-center gap-1 text-gray-600">
-            <GitFork size={16} /> {repo.forks_count}
-          </span>
+          <a
+            href={repo.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-medium text-primary hover:text-primary-light transition-colors"
+          >
+            View Repo &rarr;
+          </a>
         </div>
-      </div>
-
-      {/* Footer */}
-      <div className="flex items-center justify-between mt-4 text-xs text-gray-500">
-        <span>Updated {formatDate(repo.updated_at)}</span>
-        <a
-          href={repo.html_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1 text-gray-600 hover:text-blue-500"
-        >
-          <Github size={14} /> View Repo
-        </a>
       </div>
     </div>
   );

@@ -1,25 +1,45 @@
+"use client";
 
-import AboutSection from "../components/ui/AboutSection";
-import ExperienceSection from "../components/ui/ExperienceSection";
-import Footer from "../components/ui/Footer";
-import HeaderMain from "../components/ui/Header";
-import Hero from "../components/ui/Hero";
-import ProjectSelection from "../components/ui/ProjectSelection";
-import SkillsSection from "../components/ui/SkillsSection";
-import { portfolioConfig } from "../config/portfolio";
+import { useEffect } from "react";
+import Header from "@/app/components/ui/Header";
+import Hero from "@/app/components/ui/Hero";
+import AboutSection from "@/app/components/ui/AboutSection";
+import SkillsSection from "@/app/components/ui/SkillsSection";
+import TimelineSection from "@/app/components/ui/TimelineSection";
+import ProjectSelection from "@/app/components/ui/ProjectSelection";
+import WebsitesSection from "@/app/components/ui/WebsitesSection";
+import ContactSection from "@/app/components/ui/ContactSection";
+import Footer from "@/app/components/ui/Footer";
 
 const Index = () => {
-  const {personal} = portfolioConfig;
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll(".reveal");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
-      
-      <HeaderMain />
+      <Header />
       <Hero />
       <AboutSection />
       <SkillsSection />
       <ProjectSelection />
-      {/* <ExperienceSection /> */}
+      <WebsitesSection />
+      <TimelineSection />
+      <ContactSection />
       <Footer />
     </>
   );

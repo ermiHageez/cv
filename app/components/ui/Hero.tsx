@@ -9,6 +9,7 @@ import {
   Send,
   ArrowDown,
   Download,
+  User,
 } from "lucide-react";
 
 export default function Hero() {
@@ -58,22 +59,28 @@ export default function Hero() {
               className="flex flex-wrap gap-4 animate-fade-in-up"
               style={{ animationDelay: "0.4s" }}
             >
-              <button
-                onClick={() => scrollTo("#projects")}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-medium hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5"
-              >
-                View Projects
-                <ArrowDown size={16} />
-              </button>
               <a
                 href={portfolioConfig.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass hover:glass-hover text-foreground font-medium transition-all duration-300 hover:-translate-y-0.5"
+                download
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-medium hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5"
               >
                 Download CV
                 <Download size={16} />
               </a>
+              <button
+                onClick={() => scrollTo("#projects")}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass hover:glass-hover text-foreground font-medium transition-all duration-300 hover:-translate-y-0.5"
+              >
+                View Projects
+                <ArrowDown size={16} />
+              </button>
+              <button
+                onClick={() => scrollTo("#about")}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass hover:glass-hover text-foreground font-medium transition-all duration-300 hover:-translate-y-0.5"
+              >
+                About Me
+                <User size={16} />
+              </button>
               <button
                 onClick={() => scrollTo("#contact")}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-muted hover:text-foreground hover:border-white/10 font-medium transition-all duration-300 hover:-translate-y-0.5"
@@ -143,19 +150,19 @@ export default function Hero() {
             </div>
 
             <div className="absolute -top-3 -right-3 glass rounded-xl px-4 py-2 text-sm font-medium animate-float shadow-lg">
-              <span className="gradient-text">React</span>
+              <span className="gradient-text">AI Engineer</span>
             </div>
             <div
               className="absolute -bottom-2 -left-3 glass rounded-xl px-4 py-2 text-sm font-medium animate-float shadow-lg"
               style={{ animationDelay: "2s" }}
             >
-              <span className="gradient-text-blue">Node.js</span>
+              <span className="gradient-text-blue">Backend Dev</span>
             </div>
             <div
               className="absolute top-1/2 -right-6 glass rounded-xl px-4 py-2 text-sm font-medium animate-float shadow-lg hidden md:block"
               style={{ animationDelay: "4s" }}
             >
-              <span className="gradient-text">PostgreSQL</span>
+              <span className="gradient-text">ERP Developer</span>
             </div>
           </div>
         </div>

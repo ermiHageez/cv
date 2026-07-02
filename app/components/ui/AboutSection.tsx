@@ -1,31 +1,38 @@
 "use client";
 
 import { portfolioConfig } from "@/app/config/portfolio";
-import { MapPin, Code2, Database, Building2 } from "lucide-react";
+import {
+  MapPin,
+  Code2,
+  Brain,
+  Building2,
+  CheckCircle,
+  Briefcase,
+} from "lucide-react";
 
 const highlights = [
   {
     icon: Building2,
     label: "Focus",
-    value: "Backend Systems & ERP",
+    value: "Backend Systems & AI",
   },
   {
-    icon: Database,
-    label: "Expertise",
-    value: "PostgreSQL & REST APIs",
+    icon: Brain,
+    label: "AI Expertise",
+    value: "RAG, LLMs, Multi-Agent",
   },
   {
     icon: Code2,
     label: "Stack",
-    value: "React, Node.js, Java",
+    value: "Node.js, Python, Java",
   },
 ];
 
 export default function AboutSection() {
-  const { personal } = portfolioConfig;
+  const { personal, currentExperience } = portfolioConfig;
 
   return (
-    <section id="about" className="py-28 relative">
+    <section id="about" className="py-28 relative margin-button-[100px]">
       <div className="glow-orb top-0 right-1/4 bg-primary/60" />
 
       <div className="max-w-7xl mx-auto px-6">
@@ -42,20 +49,7 @@ export default function AboutSection() {
               {personal.bio}
             </p>
             <p className="text-lg text-muted leading-relaxed">
-              My journey in software engineering started with curiosity about
-              how systems work under the hood. Over time, that curiosity evolved
-              into a passion for building enterprise-grade applications that
-              solve real business problems. From inventory management to ERP
-              workflows, I focus on creating systems that are reliable,
-              scalable, and maintainable.
-            </p>
-            <p className="text-lg text-muted leading-relaxed">
-              I believe great engineering is about more than just writing code.
-              It&apos;s about understanding the problem deeply, designing clean
-              architecture, and building solutions that stand the test of time.
-              I&apos;m constantly exploring new technologies in backend
-              development, database design, and AI integration to stay at the
-              cutting edge of the industry.
+              {personal.aboutExtended}
             </p>
           </div>
 
@@ -91,6 +85,54 @@ export default function AboutSection() {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Current Experience Card */}
+        <div className="mt-28 glass rounded-2xl p-8 md:p-10 reveal reveal-delay-1">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-3 rounded-lg bg-primary/10 text-primary">
+              <Briefcase size={22} />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold">{currentExperience.title}</h3>
+              <p className="text-muted-foreground text-sm">
+                {currentExperience.company} &middot; {currentExperience.role}
+              </p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-3">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-primary">
+                Responsibilities
+              </h4>
+              {currentExperience.responsibilities.map((item) => (
+                <div key={item.category} className="flex items-start gap-3">
+                  <CheckCircle size={16} className="text-primary mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-foreground font-medium text-sm">
+                      {item.category}
+                    </p>
+                    <p className="text-muted-foreground text-xs">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="space-y-3">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-accent">
+                Achievements
+              </h4>
+              {currentExperience.achievements.map((achievement) => (
+                <div key={achievement} className="flex items-start gap-3">
+                  <CheckCircle size={16} className="text-accent mt-0.5 shrink-0" />
+                  <p className="text-muted text-sm">{achievement}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

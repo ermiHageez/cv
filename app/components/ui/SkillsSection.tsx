@@ -6,7 +6,6 @@ import {
   Server,
   Database,
   GitBranch,
-  Wrench,
   Brain,
 } from "lucide-react";
 
@@ -15,8 +14,7 @@ const categoryIcons: Record<string, React.ElementType> = {
   Backend: Server,
   Databases: Database,
   DevOps: GitBranch,
-  Tools: Wrench,
-  "AI/ML": Brain,
+  AI: Brain,
 };
 
 const categoryGradients: Record<string, string> = {
@@ -24,8 +22,7 @@ const categoryGradients: Record<string, string> = {
   Backend: "from-emerald-500 to-teal-500",
   Databases: "from-violet-500 to-purple-500",
   DevOps: "from-orange-500 to-amber-500",
-  Tools: "from-rose-500 to-pink-500",
-  "AI/ML": "from-indigo-500 to-blue-500",
+  AI: "from-indigo-500 to-blue-500",
 };
 
 export default function SkillsSection() {
@@ -46,7 +43,7 @@ export default function SkillsSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {skills.map((category, index) => {
-            const Icon = categoryIcons[category.category] || Wrench;
+            const Icon = categoryIcons[category.category] || Server;
             const gradient = categoryGradients[category.category] || "from-primary to-accent";
 
             return (

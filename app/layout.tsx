@@ -10,23 +10,27 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ermiyas Eshetu | Full-Stack Engineer",
+  title: "Ermiyas Eshetu | Backend Software Engineer | AI Engineer | ERP Developer",
   description:
-    "Full-Stack Engineer focused on scalable backend systems, enterprise applications, and modern web technologies. Building robust APIs, ERP workflows, and performant web solutions.",
+    "Backend Software Engineer, AI Engineer, and ERP Developer from Ethiopia. Building scalable backend systems, AI-powered applications, and enterprise ERP solutions.",
   keywords: [
-    "full-stack engineer",
-    "backend developer",
+    "backend engineer",
+    "AI engineer",
+    "ERP developer",
     "software engineer",
-    "React",
-    "TypeScript",
+    "Python",
     "Node.js",
+    "Java",
+    "LangChain",
+    "RAG",
     "PostgreSQL",
     "Ethiopia",
+    "Addis Ababa",
   ],
   openGraph: {
-    title: "Ermiyas Eshetu | Full-Stack Engineer",
+    title: "Ermiyas Eshetu | Backend Software Engineer | AI Engineer | ERP Developer",
     description:
-      "Full-Stack Engineer building scalable backend systems and modern web applications.",
+      "Building scalable backend systems, AI-powered applications, and enterprise ERP solutions.",
     type: "website",
   },
 };

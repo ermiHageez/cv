@@ -7,7 +7,15 @@ const bannerGradients = [
   "from-blue-600/20 to-purple-600/20",
   "from-emerald-600/20 to-teal-600/20",
   "from-orange-600/20 to-rose-600/20",
+  "from-violet-600/20 to-indigo-600/20",
 ];
+
+const statusColors: Record<string, string> = {
+  "In Active Development": "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
+  Published: "bg-green-500/10 text-green-400 border-green-500/20",
+  "Completed (Version 2)": "bg-blue-500/10 text-blue-400 border-blue-500/20",
+  Live: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+};
 
 export default function WebsitesSection() {
   const { websites } = portfolioConfig;
@@ -46,7 +54,20 @@ export default function WebsitesSection() {
               </div>
 
               <div className="p-6">
-                <h3 className="text-lg font-semibold mb-2">{site.name}</h3>
+                <div className="flex items-start justify-between mb-2">
+                  <h3 className="text-lg font-semibold">{site.name}</h3>
+                  {site.status && (
+                    <span
+                      className={`px-2.5 py-1 text-[11px] font-medium rounded-full border shrink-0 ${
+                        statusColors[site.status] ||
+                        "bg-primary/10 text-primary border-primary/20"
+                      }`}
+                    >
+                      {site.status}
+                    </span>
+                  )}
+                </div>
+
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                   {site.description}
                 </p>
@@ -63,24 +84,28 @@ export default function WebsitesSection() {
                 </div>
 
                 <div className="flex items-center gap-3 pt-4 border-t border-border">
-                  <a
-                    href={site.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary-light transition-colors"
-                  >
-                    <ExternalLink size={14} />
-                    Live Site
-                  </a>
-                  <a
-                    href={site.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    <Github size={14} />
-                    Source
-                  </a>
+                  {site.url !== "#" && (
+                    <a
+                      href={site.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary-light transition-colors"
+                    >
+                      <ExternalLink size={14} />
+                      Live Site
+                    </a>
+                  )}
+                  {site.github !== "#" && (
+                    <a
+                      href={site.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <Github size={14} />
+                      Source
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

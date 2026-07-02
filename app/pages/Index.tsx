@@ -5,9 +5,11 @@ import Header from "@/app/components/ui/Header";
 import Hero from "@/app/components/ui/Hero";
 import AboutSection from "@/app/components/ui/AboutSection";
 import SkillsSection from "@/app/components/ui/SkillsSection";
-import TimelineSection from "@/app/components/ui/TimelineSection";
-import ProjectSelection from "@/app/components/ui/ProjectSelection";
+import FeaturedProjectsSection from "@/app/components/ui/FeaturedProjectsSection";
+import AiModelsSection from "@/app/components/ui/AiModelsSection";
+import CertificationsSection from "@/app/components/ui/CertificationsSection";
 import WebsitesSection from "@/app/components/ui/WebsitesSection";
+import ExperienceSection from "@/app/components/ui/ExperienceSection";
 import ContactSection from "@/app/components/ui/ContactSection";
 import Footer from "@/app/components/ui/Footer";
 
@@ -36,9 +38,11 @@ const Index = () => {
       <Hero />
       <AboutSection />
       <SkillsSection />
-      <ProjectSelection />
+      <FeaturedProjectsSection />
+      <AiModelsSection />
+      <CertificationsSection />
       <WebsitesSection />
-      <TimelineSection />
+      <ExperienceSection />
       <ContactSection />
       <Footer />
     </>
